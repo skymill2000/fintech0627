@@ -10,10 +10,15 @@ const InputComponents = () => {
     setContents(value);
   };
 
+  const handleClick = () => {
+    alert(contents);
+  };
+
   return (
     <div>
       <p>{contents}</p>
       <input onChange={handleChange}></input>
+      <button onClick={handleClick}>전송</button>
     </div>
   );
 };
