@@ -22,3 +22,6 @@ console.log(plus(2, 4));
 console.log(minus(5, 6));
 console.log(div(2, 4));
 console.log(mul(5, 6));
+
+//def
+//public void  // public String
