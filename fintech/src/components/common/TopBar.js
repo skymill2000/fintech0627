@@ -2,14 +2,17 @@ import React from "react";
 import styled from "styled-components";
 
 const TopBarBlock = styled.div`
-  height: 60px;
-  font-size: 15px;
+  border-bottom: 1px dotted #000;
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
   font-weight: bold;
-  border-bottom: 1px solid #000;
 `;
 
-const TopBar = () => {
-  return <TopBarBlock>안녕하세요</TopBarBlock>;
+const TopBar = ({ title }) => {
+  return <TopBarBlock>{title}</TopBarBlock>;
 };
 
 export default TopBar;
