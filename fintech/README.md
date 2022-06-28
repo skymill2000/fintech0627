@@ -1,3 +1,7 @@
+# 소스코드 다운받으신분들은
+
+npm install 입력
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
