@@ -24,3 +24,7 @@ for (element of cars) {
 cars.map((data) => {
   console.log(data);
 });
+
+cars.map(function (data) {
+  console.log(data);
+});
