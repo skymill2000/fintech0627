@@ -23,4 +23,5 @@ const car2 = "bmw";
 const cars = [car3, car1, car2];
 
 const [a] = cars;
+const b = cars[1];
 console.log(a);
