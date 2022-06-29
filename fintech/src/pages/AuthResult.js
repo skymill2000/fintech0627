@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import axios from "axios";
 const AuthResult = () => {
   const parsedCode = queryString.parse(useLocation().search).code;
+  const [accessToken, setAccessToken] = useState("토큰 받아오기 전");
+  const [userSeqNo, setUserSeqNo] = useState("시퀸스 넘버 받아오기전");
   const handleClick = () => {
     //axios 활용하여 Post 요청 작성하기
     const data = {
@@ -26,14 +28,17 @@ const AuthResult = () => {
       },
       data: sendData,
     };
-    axios(option).then((response) => {
-      console.log(response);
+    axios(option).then(({ data }) => {
+      setAccessToken(data.access_token);
+      setUserSeqNo(data.user_seq_no);
     });
   };
   return (
     <div>
       <p>인증코드 : {parsedCode}</p>
       <button onClick={handleClick}>Access Token 발급 받기</button>
+      <p>사용자 AccessToken : {accessToken}</p>
+      <p>사용자 UserSeqNo : {userSeqNo}</p>
     </div>
   );
 };
