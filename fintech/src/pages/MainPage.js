@@ -1,15 +1,16 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import TopBar from "../components/common/TopBar";
 import MainCard from "../components/main/MainCard";
 
 const MainPage = () => {
+  const [accountList, setAccountList] = useState([]);
   useEffect(() => {
     console.log("안녕");
-    getAcountList();
+    getAccountList();
   }, []);
 
-  const getAcountList = () => {
+  const getAccountList = () => {
     const accessToken = localStorage.getItem("accessToken");
     const userSeqNo = localStorage.getItem("userSeqNo");
     console.log(accessToken, userSeqNo);
@@ -25,14 +26,22 @@ const MainPage = () => {
       params: { user_seq_no: userSeqNo },
     };
     axios(option).then(({ data }) => {
-      console.log(data);
+      console.log(data.res_list);
+      setAccountList(data.res_list);
     });
   };
 
   return (
     <div>
       <TopBar title={"계좌 목록"} />
-      <MainCard></MainCard>
+      {accountList.map((account) => {
+        return (
+          <MainCard
+            bankName={account.bank_name}
+            fintechUseNo={account.fintech_use_num}
+          ></MainCard>
+        );
+      })}
     </div>
   );
 };
