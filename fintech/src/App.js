@@ -5,6 +5,7 @@ import AxiosTest from "./pages/AxiosTest";
 import NewsApiPage from "./pages/NewsApiPage";
 import IndexPage from "./pages/IndexPage";
 import AuthResult from "./pages/AuthResult";
+import MainPage from "./pages/MainPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<IndexPage />}></Route>
         <Route path="/authResult" element={<AuthResult />}></Route>
+        <Route path="/main" element={<MainPage />}></Route>
       </Routes>
     </BrowserRouter>
   );
