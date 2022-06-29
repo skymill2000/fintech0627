@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import TopBar from "../components/common/TopBar";
 import MainCard from "../components/main/MainCard";
@@ -14,6 +15,18 @@ const MainPage = () => {
     console.log(accessToken, userSeqNo);
     //axios 로 /v2.0/user/me?user_seq_no=1100034736 요청 작성하기
     //header Authorization 값 입력
+    //params
+    const option = {
+      method: "GET",
+      url: "/v2.0/user/me",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      params: { user_seq_no: userSeqNo },
+    };
+    axios(option).then(({ data }) => {
+      console.log(data);
+    });
   };
 
   return (
