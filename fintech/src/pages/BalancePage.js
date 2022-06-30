@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BalanceCard from "../components/balance/BalanceCard";
 import TopBar from "../components/common/TopBar";
 import { useLocation } from "react-router-dom";
@@ -7,6 +7,7 @@ import axios from "axios";
 
 const BalancePage = () => {
   const fintechUseNo = queryString.parse(useLocation().search).fintechUseNo;
+  const [balanceData, setBalanceData] = useState({});
   console.log(fintechUseNo);
 
   useEffect(() => {
@@ -17,6 +18,13 @@ const BalancePage = () => {
     const accessToken = localStorage.getItem("accessToken");
     const userSeqNo = localStorage.getItem("userSeqNo");
     console.log(accessToken, userSeqNo);
+
+    const genTransId = () => {
+      let countnum = Math.floor(Math.random() * 1000000000) + 1;
+      let transId = "T991599190U" + countnum; //이용기관번호 본인것 입력
+      return transId;
+    };
+
     const option = {
       method: "GET",
       url: "/v2.0/account/balance/fin_num",
@@ -24,13 +32,14 @@ const BalancePage = () => {
         Authorization: `Bearer ${accessToken}`,
       },
       params: {
-        bank_tran_id: "T991599190U000000012",
+        bank_tran_id: genTransId(),
         fintech_use_num: fintechUseNo,
         tran_dtime: "20220630104700",
       },
     };
     axios(option).then(({ data }) => {
       console.log(data);
+      setBalanceData(data);
     });
   };
   //useEffect
@@ -40,7 +49,11 @@ const BalancePage = () => {
   return (
     <div>
       <TopBar title={"잔액조회"}></TopBar>
-      <BalanceCard></BalanceCard>
+      <BalanceCard
+        bankName={balanceData.bank_name}
+        fintechNo={fintechUseNo}
+        balance={balanceData.balance_amt}
+      ></BalanceCard>
     </div>
   );
 };
