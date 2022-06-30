@@ -4,6 +4,7 @@ import TopBar from "../components/common/TopBar";
 import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 import axios from "axios";
+import TransactionList from "../components/balance/TransactionList";
 
 const BalancePage = () => {
   const fintechUseNo = queryString.parse(useLocation().search).fintechUseNo;
@@ -12,6 +13,7 @@ const BalancePage = () => {
 
   useEffect(() => {
     getBalance();
+    getTransactionList();
   }, []);
 
   const getBalance = () => {
@@ -46,6 +48,9 @@ const BalancePage = () => {
   //amount state
   //axios 요청을 작성
   //banktransid 작성 ??<----
+
+  const getTransactionList = () => {};
+
   return (
     <div>
       <TopBar title={"잔액조회"}></TopBar>
@@ -54,6 +59,7 @@ const BalancePage = () => {
         fintechNo={fintechUseNo}
         balance={balanceData.balance_amt}
       ></BalanceCard>
+      <TransactionList transactionList={[]}></TransactionList>
     </div>
   );
 };
