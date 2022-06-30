@@ -19,7 +19,9 @@ const QrCodePage = () => {
     <div>
       <TopBar title={"QR코드"}></TopBar>
       <QRBlock>
-        <QRCodeSVG size={200} value={fintechUseNo} />,
+        <QRCodeSVG size={200} value={fintechUseNo} />
+        <br />
+        <p>{fintechUseNo}</p>
       </QRBlock>
     </div>
   );
