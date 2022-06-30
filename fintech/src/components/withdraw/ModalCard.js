@@ -37,6 +37,37 @@ const ModalCard = ({ bankName, fintechUseNo, tofintechno }) => {
 
   const handlePayButtonClick = () => {
     //출금 이체 발생시키기
+    //data params json
+    const accessToken = localStorage.getItem("accessToken");
+
+    const data = {
+      bank_tran_id: genTransId(),
+      cntr_account_type: "N",
+      cntr_account_num: "7832932596",
+      dps_print_content: "쇼핑몰환불",
+      fintech_use_num: fintechUseNo,
+      wd_print_content: "오픈뱅킹출금",
+      tran_amt: amount,
+      tran_dtime: "20220630145100",
+      req_client_name: "홍길동",
+      req_client_fintech_use_num: "199159919057870987723340",
+      req_client_num: "HONGGILDONG1234",
+      transfer_purpose: "ST",
+      recv_client_name: "진상언",
+      recv_client_bank_code: "097",
+      recv_client_account_num: "7832932596",
+    };
+    const option = {
+      method: "POST",
+      url: "/v2.0/transfer/withdraw/fin_num",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      data: data,
+    };
+    axios(option).then(({ data }) => {
+      console.log(data);
+    });
   };
 
   const deposit = () => {};
