@@ -35,7 +35,9 @@ const ModalCard = ({ bankName, fintechUseNo, tofintechno }) => {
     return transId;
   };
 
-  const handlePayButtonClick = () => {};
+  const handlePayButtonClick = () => {
+    //출금 이체 발생시키기
+  };
 
   const deposit = () => {};
 
