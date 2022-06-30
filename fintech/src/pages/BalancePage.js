@@ -8,6 +8,7 @@ import axios from "axios";
 const BalancePage = () => {
   const fintechUseNo = queryString.parse(useLocation().search).fintechUseNo;
   console.log(fintechUseNo);
+
   useEffect(() => {
     getBalance();
   }, []);
@@ -18,13 +19,19 @@ const BalancePage = () => {
     console.log(accessToken, userSeqNo);
     const option = {
       method: "GET",
-      url: "",
+      url: "/v2.0/account/balance/fin_num",
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      params: { user_seq_no: userSeqNo },
+      params: {
+        bank_tran_id: "T991599190U000000012",
+        fintech_use_num: fintechUseNo,
+        tran_dtime: "20220630104700",
+      },
     };
-    axios(option).then(({ data }) => {});
+    axios(option).then(({ data }) => {
+      console.log(data);
+    });
   };
   //useEffect
   //amount state
