@@ -6,6 +6,7 @@ import NewsApiPage from "./pages/NewsApiPage";
 import IndexPage from "./pages/IndexPage";
 import AuthResult from "./pages/AuthResult";
 import MainPage from "./pages/MainPage";
+import BalancePage from "./pages/BalancePage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<IndexPage />}></Route>
         <Route path="/authResult" element={<AuthResult />}></Route>
         <Route path="/main" element={<MainPage />}></Route>
+        <Route path="/balance" element={<BalancePage />}></Route>
       </Routes>
     </BrowserRouter>
   );
