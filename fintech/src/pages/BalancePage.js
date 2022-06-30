@@ -9,6 +9,7 @@ import TransactionList from "../components/balance/TransactionList";
 const BalancePage = () => {
   const fintechUseNo = queryString.parse(useLocation().search).fintechUseNo;
   const [balanceData, setBalanceData] = useState({});
+  const [transactionList, setTransactionList] = useState([]);
   console.log(fintechUseNo);
 
   useEffect(() => {
@@ -16,16 +17,14 @@ const BalancePage = () => {
     getTransactionList();
   }, []);
 
+  const genTransId = () => {
+    let countnum = Math.floor(Math.random() * 1000000000) + 1;
+    let transId = "T991599190U" + countnum; //이용기관번호 본인것 입력
+    return transId;
+  };
+
   const getBalance = () => {
     const accessToken = localStorage.getItem("accessToken");
-    const userSeqNo = localStorage.getItem("userSeqNo");
-    console.log(accessToken, userSeqNo);
-
-    const genTransId = () => {
-      let countnum = Math.floor(Math.random() * 1000000000) + 1;
-      let transId = "T991599190U" + countnum; //이용기관번호 본인것 입력
-      return transId;
-    };
 
     const option = {
       method: "GET",
@@ -49,7 +48,21 @@ const BalancePage = () => {
   //axios 요청을 작성
   //banktransid 작성 ??<----
 
-  const getTransactionList = () => {};
+  const getTransactionList = () => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    const option = {
+      method: "GET",
+      url: "",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      params: {},
+    };
+    axios(option).then(({ data }) => {
+      setTransactionList();
+    });
+  };
 
   return (
     <div>
@@ -59,7 +72,7 @@ const BalancePage = () => {
         fintechNo={fintechUseNo}
         balance={balanceData.balance_amt}
       ></BalanceCard>
-      <TransactionList transactionList={[]}></TransactionList>
+      <TransactionList transactionList={transactionList}></TransactionList>
     </div>
   );
 };
