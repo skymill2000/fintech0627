@@ -40,8 +40,9 @@ app.post("/addNumber", (req, res) => {
 });
 
 app.get("/user", (req, res) => {
-  const sql = "SELECT * FROM user";
-  connection.query(sql, [], (err, result) => {
+  const userName = req.query.userName;
+  const sql = "SELECT * FROM user WHERE name = ?";
+  connection.query(sql, [userName], (err, result) => {
     console.log(result);
     res.json(result);
   });
