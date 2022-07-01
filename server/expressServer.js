@@ -47,6 +47,21 @@ app.get("/user", (req, res) => {
     res.json(result);
   });
 });
+
+app.post("/user", (req, res) => {
+  const { userName, userEmail, userPassword, userPhone } = req.body;
+  const sql =
+    "INSERT INTO user (name, email, password, phone) VALUES (?,?,?,?)";
+  connection.query(
+    sql,
+    [userName, userEmail, userPassword, userPhone],
+    (err, result) => {
+      console.log(result);
+      res.json(result);
+    }
+  );
+});
+
 //req 로 firstNum secondNum 더한 값을 response 라우터 추가
 //Method : POST
 //url : /addNumber
