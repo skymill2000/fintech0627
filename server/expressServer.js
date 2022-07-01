@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+//JSON 형태의 데이터 전송을 허용하겠다
+app.use(express.urlencoded({ extended: false }));
+//urlencoded 형식의 데이터 전송을 허용하겠다
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
@@ -13,6 +18,11 @@ app.get("/hello", (req, res) => {
 app.get("/getParams", (req, res) => {
   console.log(req.query);
   res.send(`너의 핀테크 번호는 ${req.query.fintech_use_num}`);
+});
+
+app.post("/postBody", (req, res) => {
+  console.log(req.body);
+  res.send("");
 });
 
 app.listen(port, () => {
