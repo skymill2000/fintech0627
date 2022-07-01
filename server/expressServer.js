@@ -25,6 +25,16 @@ app.post("/postBody", (req, res) => {
   res.send("");
 });
 
+app.post("/addNumber", (req, res) => {
+  const { firstNum, secondNum } = req.body;
+  const result = Number(firstNum) + Number(secondNum);
+  res.send("결과는: " + result);
+});
+
+//req 로 firstNum secondNum 더한 값을 response 라우터 추가
+//Method : POST
+//url : /addNumber
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
