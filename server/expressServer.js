@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const mysql = require("mysql2");
+const jwt = require("jsonwebtoken");
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -78,9 +79,9 @@ app.post("/login", (req, res) => {
     if (result.length === 0) {
       res.json("회원 정보가 없습니다.");
     } else {
-      console.log(result);
       if (result[0].password === userPassword) {
-        res.json(true);
+        let token = jwt.sign({ foo: "bar" }, "shhhhh");
+        res.json(token);
       } else {
         res.json(false);
       }
