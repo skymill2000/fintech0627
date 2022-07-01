@@ -71,9 +71,22 @@ app.post("/userUpdate", (req, res) => {
   });
 });
 
-//req 로 firstNum secondNum 더한 값을 response 라우터 추가
-//Method : POST
-//url : /addNumber
+app.post("/login", (req, res) => {
+  const { userEmail, userPassword } = req.body;
+  const sql = "SELECT * FROM user WHERE email = ?";
+  connection.query(sql, [userEmail], (err, result) => {
+    if (result.length === 0) {
+      res.json("회원 정보가 없습니다.");
+    } else {
+      console.log(result);
+      if (result[0].password === userPassword) {
+        res.json(true);
+      } else {
+        res.json(false);
+      }
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
