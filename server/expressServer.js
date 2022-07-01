@@ -80,8 +80,21 @@ app.post("/login", (req, res) => {
       res.json("회원 정보가 없습니다.");
     } else {
       if (result[0].password === userPassword) {
-        let token = jwt.sign({ foo: "bar" }, "shhhhh");
-        res.json(token);
+        jwt.sign(
+          {
+            userId: results[0].id,
+          },
+          "fintech!@#$1234",
+          {
+            expiresIn: "1d",
+            issuer: "fintech.admin",
+            subject: "user.login.info",
+          },
+          function (err, token) {
+            console.log("로그인 성공", token);
+            res.json(token);
+          }
+        );
       } else {
         res.json(false);
       }
