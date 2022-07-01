@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const mysql = require("mysql2");
 const jwt = require("jsonwebtoken");
+const auth = require("./lib/auth");
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -82,7 +83,7 @@ app.post("/login", (req, res) => {
       if (result[0].password === userPassword) {
         jwt.sign(
           {
-            userId: results[0].id,
+            userId: result[0].id,
           },
           "fintech!@#$1234",
           {
@@ -100,6 +101,16 @@ app.post("/login", (req, res) => {
       }
     }
   });
+});
+
+app.get("/myData", auth, (req, res) => {
+  connection.query(
+    "SELECT * FROM USER WHERE id =?",
+    [req.decoded.userId],
+    (err, result) => {
+      res.json(result);
+    }
+  );
 });
 
 app.listen(port, () => {
