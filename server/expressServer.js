@@ -62,6 +62,15 @@ app.post("/user", (req, res) => {
   );
 });
 
+app.post("/userUpdate", (req, res) => {
+  const { userId, userPhone } = req.body;
+  const sql = "UPDATE user SET phone = ? WHERE id = ?";
+  connection.query(sql, [userPhone, userId], (err, result) => {
+    console.log(result);
+    res.json(result);
+  });
+});
+
 //req 로 firstNum secondNum 더한 값을 response 라우터 추가
 //Method : POST
 //url : /addNumber
