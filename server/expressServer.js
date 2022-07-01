@@ -1,6 +1,14 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const mysql = require("mysql2");
+
+const connection = mysql.createConnection({
+  host: "localhost",
+  user: "service",
+  password: "1q2w3e4r!",
+  database: "fintech",
+});
 
 app.use(express.json());
 //JSON 형태의 데이터 전송을 허용하겠다
@@ -31,6 +39,10 @@ app.post("/addNumber", (req, res) => {
   res.send("결과는: " + result);
 });
 
+app.get("/user", (req, res) => {
+  //사용자 전체 목록
+  res.json();
+});
 //req 로 firstNum secondNum 더한 값을 response 라우터 추가
 //Method : POST
 //url : /addNumber
