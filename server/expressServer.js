@@ -40,8 +40,11 @@ app.post("/addNumber", (req, res) => {
 });
 
 app.get("/user", (req, res) => {
-  //사용자 전체 목록
-  res.json();
+  const sql = "SELECT * FROM user";
+  connection.query(sql, [], (err, result) => {
+    console.log(result);
+    res.json(result);
+  });
 });
 //req 로 firstNum secondNum 더한 값을 response 라우터 추가
 //Method : POST
